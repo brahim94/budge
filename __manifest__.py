@@ -5,7 +5,7 @@
     "author": "Warlock Technologies",
     "description": """Tech Budget""",
     "summary": """Tech Budget""",
-    "version": "1.9",
+    "version": "1.10",
     "support": "info@warlocktechnologies.com",
     "website": "http://warlocktechnologies.com",
     "license": "LGPL-3",
