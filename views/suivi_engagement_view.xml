@@ -1,0 +1,179 @@
+<odoo>
+  <data>
+
+     <!--Engagement Log Tree -->
+    <record model="ir.ui.view" id="engagements_list_view">
+      <field name="name">Engagement list</field>
+      <field name="model">engagement.log</field>
+      <field name="arch" type="xml">
+        <tree editable="bottom" create="false" delete="false">
+          <field name="dengagement" readonly="1"/>
+          <field name="date" readonly="1"/>
+          <field name="montant_dengagement" readonly="1"/>
+          <field name="contrat_type_id" readonly="1"/>
+          <field name="ref_operation" readonly="1"/>
+          <field name="type_budget" readonly="1"/>
+          <field name="tech_budget_id" readonly="1"/>
+          <field name="nature_id" readonly="1"/>
+          <field name="rubrique_id" readonly="1"/>
+        </tree>
+      </field>
+    </record>
+
+    <!--Engagement Log Form -->
+    <record id="view_engagements_form" model="ir.ui.view">
+        <field name="name">Engagement form</field>
+        <field name="model">engagement.log</field>
+        <field name="arch" type="xml">
+            <form>
+             <!--  <header>                    
+                  <field name="state" widget="statusbar" statusbar_visible="new" options="{'clickable': '1'}"/>
+                </header> -->
+                <sheet>
+
+                  <group>
+                  <group>
+                    <field name="dengagement"/>
+                    <field name="date"/>
+                    <field name="montant_dengagement"/>
+                    <field name="contrat_type_id"/>
+                    <field name="ref_operation"/>
+                  </group>
+                  <group>
+                    <field name="type_budget"/>
+                    <field name="tech_budget_id"/>
+                    <field name="nature_id"/>
+                    <field name="rubrique_id"/>
+                  </group>                 
+                  </group>                 
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+   <!--Engagement Log Search -->
+    <record id="view_engagement_log_search" model="ir.ui.view">
+        <field name="name">engagement.log.search</field>
+        <field name="model">engagement.log</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="tech_budget_id"/>
+                <field name="nature_id"/>
+                <field name="rubrique_id"/>
+                <field name="contrat_type_id"/>
+                <field name="type_budget"/>
+            </search>
+        </field>
+    </record>
+
+    <!--Suivi Engagement Log List View -->
+    <record model="ir.ui.view" id="suivi_engagements_list_view">
+      <field name="name">suivi.engagements list</field>
+      <field name="model">suivi.engagements</field>
+      <field name="arch" type="xml">
+        <tree>
+            <field name="tech_budget_id"/>
+            <field name="credit_inscrit"/>
+            <field name="credit_disponible"/>
+            <field name="total_engage"/>
+        </tree>
+      </field>
+    </record>
+
+    <!--Suivi Engagement Log form -->
+    <record id="view_suivi_engagements_form" model="ir.ui.view">
+        <field name="name">suivi.engagements.form</field>
+        <field name="model">suivi.engagements</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                  <group>
+                    <div class="row">
+                      <div class="col-4">
+                        <group>
+                          <label for="type_budget"/>
+                          <field name="type_budget" nolabel="1"/>
+                        </group>
+                      </div>
+                      <div class="col-4" style="float:right;">
+                        <group>
+                          <label for="tech_budget_id"/>
+                          <field name="tech_budget_id" domain="[('type_budget', '=', type_budget)]" nolabel="1"/>
+                        </group>
+                      </div>
+                      
+                    </div>
+                  </group>    
+
+                  <group>
+                    <div class="row">
+                      <div class="col-4">
+                        <group>
+                          <label for="credit_inscrit"/>
+                          <field name="credit_inscrit" nolabel="1"/>
+                        </group>
+                      </div>
+                      <div class="col-4" style="float:right;">
+                        <group>
+                          <label for="total_engage"/>
+                          <field name="total_engage" nolabel="1"/>
+                        </group>
+                      </div>
+                      <div class="col-4 center">
+                        <group>
+                          <label for="credit_disponible"/>
+                          <field name="credit_disponible" nolabel="1"/>
+                        </group>
+                      </div>
+                    </div>
+                  </group>
+
+                  <notebook>
+                    <page string="Fiches d'engagement">
+                      <field name="engagement_log_ids" readonly="1">
+                        <tree editable="bottom">
+                            <field name="dengagement" required="1"/>
+                            <field name="date"/>
+                            <field name="montant_dengagement"/>
+                            <field name="contrat_type_id"/>
+                            <field name="ref_operation"/>
+                            <field name="type_budget" invisible="1"/>
+                            <field name="tech_budget_id" invisible="1"/>
+                            <field name="nature_id"/>
+                            <field name="rubrique_id"/>
+                          </tree>
+                      </field>
+                    </page>
+                  </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Suivi Engagements actions opening views on models -->
+    <record model="ir.actions.act_window" id="action_window_suivi_engagements">
+      <field name="name">Engagements</field>
+      <field name="res_model">suivi.engagements</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Engagement Log actions opening views on models -->
+    <record model="ir.actions.act_window" id="action_window_engagement_log">
+      <field name="name">Suivi Engagements</field>
+      <field name="res_model">engagement.log</field>
+      <field name="view_mode">tree,form</field>
+      <field name="search_view_id" ref="view_engagement_log_search"/>
+    </record>
+
+   <!--  <menuitem name="Suivi Engagements" id="tech_budget.menu_suivi_engagements_list" parent="tech_budget.menu_budget"
+              action="tech_budget.action_window_suivi_engagements" sequence="3"/>
+
+     <menuitem name="Engagements" id="tech_budget.menu_engagements_list" parent="tech_budget.menu_budget"
+              action="tech_budget.action_window_engagement_log" sequence="2"/> -->
+     <menuitem name="Engagements" id="tech_budget.menu_suivi_engagements_list" parent="tech_budget.menu_budget"
+              action="tech_budget.action_window_suivi_engagements" sequence="2"/>
+
+     <menuitem name="Suivi Engagements" id="tech_budget.menu_engagements_list" parent="tech_budget.menu_budget"
+              action="tech_budget.action_window_engagement_log" sequence="3"/>
+  </data>
+</odoo>

@@ -1,0 +1,85 @@
+<odoo>
+  <data>
+    <!-- tech budget list view definition -->
+
+    <record model="ir.ui.view" id="tech_budget_list_view">
+      <field name="name">tech budget list</field>
+      <field name="model">tech.budget</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="type_budget"/>
+          <field name="date_debut"/>
+          <field name="date_fin"/>
+        </tree>
+      </field>
+    </record>
+
+     <!--tech budget Execution Form -->
+    <record id="view_tech_budget_form" model="ir.ui.view">
+        <field name="name">tech.budget.form</field>
+        <field name="model">tech.budget</field>
+        <field name="arch" type="xml">
+            <form>
+               <header>                    
+                  <field name="state" widget="statusbar" statusbar_visible="actif,ferme" options="{'clickable': '1'}"/>
+                </header>
+                <sheet>
+                 <!--  <div class="oe_title">
+                    <h1>
+                      <label for="name"/>
+                      <field name="name" string="Référence"/>
+                    </h1>
+                  </div> -->
+
+                    <group>
+                        <group>
+                          <field name="name" string="Référence"/>
+                          <field name="sequence" string="Sequence" invisible="1"/>
+                          <field name="list_of_years"/>
+                          <field name="type_budget"/>
+                        </group>
+                        <group>
+                            <field name="date_debut"/>
+                            <field name="date_fin"/>
+                            <field name="plafond_nature"/>
+                        </group>
+                    </group>
+                    <group>
+                      <field name="tech_budget_line" nolabel="1">
+                            <tree editable="bottom">
+                              <!-- <field name="nature_id"/> -->
+                              <field name="tech_budget_id" invisible="1"/>
+                              <field name="type_budget" invisible="1"/>
+                              <field name="rubrique_id" domain="[('type_budget', '=', type_budget)]"/>
+                              <field name="credit_inscrit"/>
+                            </tree>
+                          </field>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="action_window_tech_budget">
+      <field name="name">Budgets</field>
+      <field name="res_model">tech.budget</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <!-- Top menu item -->
+    <menuitem name="Budget" id="tech_budget.menu_root" web_icon="tech_budget,static/description/icon.png"/>
+
+    <!-- menu categories -->
+    <menuitem name="Budget" id="tech_budget.menu_budget" parent="tech_budget.menu_root"/>
+    <menuitem name="Paramétres" id="tech_budget.menu_paramatres" parent="tech_budget.menu_root"/>
+
+    <!-- actions -->
+    <menuitem name="Budgets" id="tech_budget.menu_budgets_list" parent="tech_budget.menu_budget"
+              action="tech_budget.action_window_tech_budget" sequence="1"/>
+  </data>
+</odoo>

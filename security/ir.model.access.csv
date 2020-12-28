@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tech_budget,access_tech_budget,model_tech_budget,base.group_user,1,1,1,1
+access_parameter_nature,access_parameter_nature,model_parameter_nature,base.group_user,1,1,1,1
+access_rubrique_budget,access_rubrique_budget,model_rubrique_budget,base.group_user,1,1,1,1
+access_suivi_engagements,access_suivi_engagements,model_suivi_engagements,base.group_user,1,1,1,1
+access_engagement_log,access_engagement_log,model_engagement_log,base.group_user,1,1,1,1
+access_tech_budget_line,access_tech_budget_line,model_tech_budget_line,base.group_user,1,1,1,1

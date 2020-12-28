@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_market_execution_form_inherit" model="ir.ui.view">
+        <field name="name">market.execution.form.inherit</field>
+        <field name="model">market.execution</field>
+        <field name="inherit_id" ref="wt_purchase_request_extend.view_market_execution_form"/>
+        <field name="arch" type="xml">
+
+        	<xpath expr="//notebook/page/notebook/page/group[1]" position="after">
+                <!-- <label for="type_budget" string="Contrôle budgétaire" style="font-size: 1.625rem;"/>
+                <button name="button_dummy" type="object" icon="fa-refresh" style="color:green; font-size: 1.625rem;"/> -->
+        		<group string="Contrôle budgétaire">
+                    <group>
+                        <field name="type_budget"/>
+                        <field name="tech_budget_id" domain="[('type_budget', '=', type_budget)]"/>
+
+                        <field name="nature_id"/>
+                        <field name="rubrique_id"/>
+                    </group> 
+                    <group>
+                        <field name="plafond_nature" attrs="{'invisible': [('nature_id', '=', False)]}"/>
+                        <field name="credit_inscrit" attrs="{'invisible': [('rubrique_id', '=', False)]}"/>
+                        <field name="total_engage" attrs="{'invisible': [('rubrique_id', '=', False)]}"/>
+                        <field name="credit_disponible" attrs="{'invisible': [('rubrique_id', '=', False)]}"/>
+                    </group>
+                </group>
+        	</xpath>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,49 @@
+<odoo>
+  <data>
+     <record model="ir.ui.view" id="parameter_nature_list_view">
+      <field name="name">tech budget list</field>
+      <field name="model">parameter.nature</field>
+      <field name="arch" type="xml">
+        <tree>
+           <field name="code"/>
+           <field name="name"/>
+        </tree>
+      </field>
+    </record>
+
+     <!--tech budget Execution Form -->
+    <record id="view_parameter_nature_form" model="ir.ui.view">
+        <field name="name">tech.budget.form</field>
+        <field name="model">parameter.nature</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+
+                        <group>
+                          <field name="code" placeholder="Code"/>
+                        </group>
+
+                        <group>                          
+                          <field name="name" placeholder="Nom"/>   
+                        </group>
+
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="action_window_parameter_nature">
+      <field name="name">Natures</field>
+      <field name="res_model">parameter.nature</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Natures" id="tech_budget.menu_natures_list" parent="tech_budget.menu_paramatres"
+              action="tech_budget.action_window_parameter_nature"/>
+  </data>
+</odoo>
